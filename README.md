@@ -9,3 +9,9 @@ The updated code for **TechTops #28898** competing at the **FTC 2026 Istanbul Pr
 
 **Team:** TechTops #28898  
 **Season:** FIRST Tech Challenge 2025–2026
+
+
+### Prefered Plugins to Install on Android Studio:-
+- ADBConnectWiFi
+- JetBrains Marketplace Licensing
+- Rainbow Brackets
