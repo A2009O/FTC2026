@@ -1,0 +1,4 @@
+1. Add new configuration --> Choose Gradle
+2. Name:- Sloth Deploy
+3. Store As Project File --> ✅ , in C:\Users\Lenovo\Desktop\FTC2026-main\Full-Code
+4. Run:- :TeamCode:deploySloth
