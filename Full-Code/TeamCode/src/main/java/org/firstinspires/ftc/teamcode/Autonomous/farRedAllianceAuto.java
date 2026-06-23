@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Autonomous;
 
 import com.pedropathing.follower.Follower;
+import com.pedropathing.geometry.BezierCurve;
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.PathChain;
@@ -15,8 +16,8 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.RobotMemory;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
-@Autonomous(preselectTeleOp = "BlueAllianceTeleOp")
-public class farBlueAllianceAuto0Rows extends OpMode {
+@Autonomous(preselectTeleOp = "RedAllianceTeleOp")
+public class farRedAllianceAuto extends OpMode {
 
     private DcMotor turret;
 
@@ -30,7 +31,7 @@ public class farBlueAllianceAuto0Rows extends OpMode {
 
     double turretDeg = 0.0;
 
-    double TARGET_X = 0;
+    double TARGET_X = 142;
     double TARGET_Y = 134;
 
     DcMotorEx Shooter;
@@ -65,10 +66,11 @@ public class farBlueAllianceAuto0Rows extends OpMode {
 
     PathState pathState;
 
-    private final Pose startPose = new Pose(53.571969906542054, 4.18037383177568, Math.toRadians(177));
-    private final Pose shootPose = new Pose(59.52336448598131, 11.813084112149527, Math.toRadians(180));
-    private final Pose humanPose = new Pose(5.41121495327104, 4.299065420560762, Math.toRadians(180));
-    private final Pose endPose = new Pose(56.96261682242991, 32.32710280373833, Math.toRadians(180));
+    private final Pose startPose = new Pose(90.42803009345795, 4.18037383177568, Math.toRadians(3));
+    private final Pose shootPose = new Pose(84.47663551401868, 11.813084112149527, Math.toRadians(0));
+    private final Pose humanCurve = new Pose(110.308735516966884, 31.724844482443473);
+    private final Pose humanPose = new Pose(138.58878504672896, 4.299065420560762, Math.toRadians(335));
+    private final Pose endPose = new Pose(87.03738317757009, 32.32710280373833, Math.toRadians(0));
 
     private PathChain driveStartPosShootPos, driveShootPosHumanPos0, driveHumanPosShootPos0,
             driveShootPosHumanPos1, driveHumanPosShootPos1, driveShootPosHumanPos2, driveHumanPosShootPos2,
@@ -81,8 +83,8 @@ public class farBlueAllianceAuto0Rows extends OpMode {
                 .build();
 
         driveShootPosHumanPos0 = follower.pathBuilder()
-                .addPath(new BezierLine(shootPose, humanPose))
-                .setConstantHeadingInterpolation(humanPose.getHeading())
+                .addPath(new BezierCurve(shootPose, humanCurve, humanPose))
+                .setLinearHeadingInterpolation(shootPose.getHeading(), humanPose.getHeading())
                 .build();
 
         driveHumanPosShootPos0 = follower.pathBuilder()
@@ -91,8 +93,8 @@ public class farBlueAllianceAuto0Rows extends OpMode {
                 .build();
 
         driveShootPosHumanPos1 = follower.pathBuilder()
-                .addPath(new BezierLine(shootPose, humanPose))
-                .setConstantHeadingInterpolation(humanPose.getHeading())
+                .addPath(new BezierCurve(shootPose, humanCurve, humanPose))
+                .setLinearHeadingInterpolation(shootPose.getHeading(), humanPose.getHeading())
                 .build();
 
         driveHumanPosShootPos1 = follower.pathBuilder()
@@ -101,8 +103,8 @@ public class farBlueAllianceAuto0Rows extends OpMode {
                 .build();
 
         driveShootPosHumanPos2 = follower.pathBuilder()
-                .addPath(new BezierLine(shootPose, humanPose))
-                .setConstantHeadingInterpolation(humanPose.getHeading())
+                .addPath(new BezierCurve(shootPose, humanCurve, humanPose))
+                .setLinearHeadingInterpolation(shootPose.getHeading(), humanPose.getHeading())
                 .build();
 
         driveHumanPosShootPos2 = follower.pathBuilder()
@@ -111,8 +113,8 @@ public class farBlueAllianceAuto0Rows extends OpMode {
                 .build();
 
         driveShootPosHumanPos3 = follower.pathBuilder()
-                .addPath(new BezierLine(shootPose, humanPose))
-                .setConstantHeadingInterpolation(humanPose.getHeading())
+                .addPath(new BezierCurve(shootPose, humanCurve, humanPose))
+                .setLinearHeadingInterpolation(shootPose.getHeading(), humanPose.getHeading())
                 .build();
 
         driveHumanPosShootPos3 = follower.pathBuilder()
@@ -159,7 +161,7 @@ public class farBlueAllianceAuto0Rows extends OpMode {
                 }
 
                 if (!follower.isBusy()
-                        && pathTimer.getElapsedTimeSeconds() > 2) {
+                        && pathTimer.getElapsedTimeSeconds() > 2.7) {
 
                     setPathState(PathState.DRIVE_HUMANPOS_SHOOTPOS0);
                 }
@@ -172,7 +174,7 @@ public class farBlueAllianceAuto0Rows extends OpMode {
                 }
 
                 if (!follower.isBusy()
-                        && pathTimer.getElapsedTimeSeconds() > 0.5) {
+                        && pathTimer.getElapsedTimeSeconds() > 1.5) {
 
                     setPathState(PathState.SHOOT_PRELOAD2);
                 }
@@ -196,7 +198,7 @@ public class farBlueAllianceAuto0Rows extends OpMode {
                 }
 
                 if (!follower.isBusy()
-                        && pathTimer.getElapsedTimeSeconds() > 2) {
+                        && pathTimer.getElapsedTimeSeconds() > 2.7) {
 
                     setPathState(PathState.DRIVE_HUMANPOS_SHOOTPOS1);
                 }
@@ -209,7 +211,7 @@ public class farBlueAllianceAuto0Rows extends OpMode {
                 }
 
                 if (!follower.isBusy()
-                        && pathTimer.getElapsedTimeSeconds() > 0.5) {
+                        && pathTimer.getElapsedTimeSeconds() > 1.5) {
 
                     setPathState(PathState.SHOOT_PRELOAD3);
                 }
@@ -233,7 +235,7 @@ public class farBlueAllianceAuto0Rows extends OpMode {
                 }
 
                 if (!follower.isBusy()
-                        && pathTimer.getElapsedTimeSeconds() > 2) {
+                        && pathTimer.getElapsedTimeSeconds() > 2.7) {
 
                     setPathState(PathState.DRIVE_HUMANPOS_SHOOTPOS2);
                 }
@@ -246,7 +248,7 @@ public class farBlueAllianceAuto0Rows extends OpMode {
                 }
 
                 if (!follower.isBusy()
-                        && pathTimer.getElapsedTimeSeconds() > 0.5) {
+                        && pathTimer.getElapsedTimeSeconds() > 1.5) {
 
                     setPathState(PathState.SHOOT_PRELOAD4);
                 }
@@ -270,7 +272,7 @@ public class farBlueAllianceAuto0Rows extends OpMode {
                 }
 
                 if (!follower.isBusy()
-                        && pathTimer.getElapsedTimeSeconds() > 2) {
+                        && pathTimer.getElapsedTimeSeconds() > 2.7) {
 
                     setPathState(PathState.DRIVE_HUMANPOS_SHOOTPOS3);
                 }
@@ -283,7 +285,7 @@ public class farBlueAllianceAuto0Rows extends OpMode {
                 }
 
                 if (!follower.isBusy()
-                        && pathTimer.getElapsedTimeSeconds() > 0.5) {
+                        && pathTimer.getElapsedTimeSeconds() > 1.5) {
 
                     setPathState(PathState.SHOOT_PRELOAD5);
                 }

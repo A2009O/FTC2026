@@ -33,8 +33,8 @@ public class nearBlueAllianceAuto extends OpMode {
 
     int targetTicks = 0;
 
-    double TARGET_X = 0;
-    double TARGET_Y = 134;
+    double TARGET_X = 2;
+    double TARGET_Y = 130;
 
     DcMotorEx Shooter;
     public double targetVelocity = 1200;
@@ -57,14 +57,14 @@ public class nearBlueAllianceAuto extends OpMode {
         DRIVE_SHOOTPOS_INTAKE2POS,
         DRIVE_INTAKE2POS_SHOOTPOS,
         SHOOT_PRELOAD3,
-        DRIVE_SHOOTPOS_GATEINTAKE1,
-        DRIVE_GATEINTAKE_SHOOTPOS1,
+        DRIVE_SHOOTPOS_gateIntake1,
+        DRIVE_gateIntake_SHOOTPOS1,
         SHOOT_PRELOAD4,
-        DRIVE_SHOOTPOS_GATEINTAKE2,
-        DRIVE_GATEINTAKE_SHOOTPOS2,
+        DRIVE_SHOOTPOS_gateIntake2,
+        DRIVE_gateIntake_SHOOTPOS2,
         SHOOT_PRELOAD5,
-        DRIVE_SHOOTPOS_GATEINTAKE3,
-        DRIVE_GATEINTAKE_SHOOTPOS3,
+        DRIVE_SHOOTPOS_gateIntake3,
+        DRIVE_gateIntake_SHOOTPOS3,
         SHOOT_PRELOAD6
     }
 
@@ -75,13 +75,14 @@ public class nearBlueAllianceAuto extends OpMode {
     private final Pose intake1Pose= new Pose(14.177570093457943,   81.7476635514019,  Math.toRadians(180));
     private final Pose intake2Curve = new Pose(65.49532710280374,   53.831775700934585);
     private final Pose intake2Pose= new Pose(0,  53.6355140186916, Math.toRadians(180));
-    private final Pose gateIntake = new Pose(5.02429906542056,   55.13551401869161, Math.toRadians(159));
+    private final Pose gateIntake1 = new Pose(5.02429906542056,   54.13551401869161, Math.toRadians(161));
+    private final Pose gateIntake23 = new Pose(5.02429906542056,   54.13551401869161, Math.toRadians(159));
     private final Pose gateCurve = new Pose(48.59345794392524, 66.02336448598129);
     private final Pose endPose   = new Pose(56.10280373831776,   111.97196261682244, Math.toRadians(180));
 
     private PathChain driveStartPosShootPos, driveShootPosIntake1Pos, driveIntake1PosEndPos, driveShootPosIntake2Pos,
-    driveIntake2PosShootPos, driveShootPosGateIntake1, driveGateIntakeShootPos1, driveShootPosGateIntake2,
-            driveGateIntakeShootPos2, driveShootPosGateIntake3, driveGateIntakeShootPos3;
+    driveIntake2PosShootPos, driveShootPosgateIntake1, drivegateIntakeShootPos1, driveShootPosgateIntake2,
+            drivegateIntakeShootPos2, driveShootPosgateIntake3, drivegateIntakeShootPos3;
 
     public void buildPaths() {
         driveStartPosShootPos = follower.pathBuilder()
@@ -99,34 +100,34 @@ public class nearBlueAllianceAuto extends OpMode {
                 .setLinearHeadingInterpolation(intake2Pose.getHeading(), shootPose.getHeading())
                 .build();
 
-        driveShootPosGateIntake1 = follower.pathBuilder()
-                .addPath(new BezierCurve(shootPose, gateCurve, gateIntake))
-                .setLinearHeadingInterpolation(shootPose.getHeading(), gateIntake.getHeading())
+        driveShootPosgateIntake1 = follower.pathBuilder()
+                .addPath(new BezierCurve(shootPose, gateCurve, gateIntake1))
+                .setLinearHeadingInterpolation(shootPose.getHeading(), gateIntake1.getHeading())
                 .build();
 
-        driveGateIntakeShootPos1 = follower.pathBuilder()
-                .addPath(new BezierCurve(gateIntake, gateCurve, shootPose))
-                .setConstantHeadingInterpolation(gateIntake.getHeading())
+        drivegateIntakeShootPos1 = follower.pathBuilder()
+                .addPath(new BezierCurve(gateIntake1, gateCurve, shootPose))
+                .setConstantHeadingInterpolation(gateIntake1.getHeading())
                 .build();
 
-        driveShootPosGateIntake2 = follower.pathBuilder()
-                .addPath(new BezierCurve(shootPose, gateCurve, gateIntake))
-                .setConstantHeadingInterpolation(gateIntake.getHeading())
+        driveShootPosgateIntake2 = follower.pathBuilder()
+                .addPath(new BezierCurve(shootPose, gateCurve, gateIntake23))
+                .setConstantHeadingInterpolation(gateIntake23.getHeading())
                 .build();
 
-        driveGateIntakeShootPos2 = follower.pathBuilder()
-                .addPath(new BezierCurve(gateIntake, gateCurve, shootPose))
-                .setConstantHeadingInterpolation(gateIntake.getHeading())
+        drivegateIntakeShootPos2 = follower.pathBuilder()
+                .addPath(new BezierCurve(gateIntake23, gateCurve, shootPose))
+                .setConstantHeadingInterpolation(gateIntake23.getHeading())
                 .build();
 
-        driveShootPosGateIntake3 = follower.pathBuilder()
-                .addPath(new BezierCurve(shootPose, gateCurve, gateIntake))
-                .setConstantHeadingInterpolation(gateIntake.getHeading())
+        driveShootPosgateIntake3 = follower.pathBuilder()
+                .addPath(new BezierCurve(shootPose, gateCurve, gateIntake23))
+                .setConstantHeadingInterpolation(gateIntake23.getHeading())
                 .build();
 
-        driveGateIntakeShootPos3 = follower.pathBuilder()
-                .addPath(new BezierCurve(gateIntake, gateCurve, shootPose))
-                .setConstantHeadingInterpolation(gateIntake.getHeading())
+        drivegateIntakeShootPos3 = follower.pathBuilder()
+                .addPath(new BezierCurve(gateIntake23, gateCurve, shootPose))
+                .setConstantHeadingInterpolation(gateIntake23.getHeading())
                 .build();
 
         driveShootPosIntake1Pos = follower.pathBuilder()
@@ -203,28 +204,28 @@ public class nearBlueAllianceAuto extends OpMode {
                 }
                 if (shotStarted && !shooter.isBusy()) {
                     shotStarted = false;
-                    setPathState(PathState.DRIVE_SHOOTPOS_GATEINTAKE1);
+                    setPathState(PathState.DRIVE_SHOOTPOS_gateIntake1);
                 }
                 break;
 
-            case DRIVE_SHOOTPOS_GATEINTAKE1:
+            case DRIVE_SHOOTPOS_gateIntake1:
 
                 if (pathTimer.getElapsedTimeSeconds() < 0.1) {
-                    follower.followPath(driveShootPosGateIntake1, true);
+                    follower.followPath(driveShootPosgateIntake1, true);
                 }
 
                 if (!follower.isBusy()
-                        && pathTimer.getElapsedTimeSeconds() > 3) {
+                        && pathTimer.getElapsedTimeSeconds() > 3.8) {
 
-                    setPathState(PathState.DRIVE_GATEINTAKE_SHOOTPOS1);
+                    setPathState(PathState.DRIVE_gateIntake_SHOOTPOS1);
                 }
 
                 break;
 
-            case DRIVE_GATEINTAKE_SHOOTPOS1:
+            case DRIVE_gateIntake_SHOOTPOS1:
 
                 if (pathTimer.getElapsedTimeSeconds() < 0.1) {
-                    follower.followPath(driveGateIntakeShootPos1, true);
+                    follower.followPath(drivegateIntakeShootPos1, true);
                 }
 
                 if (pathTimer.getElapsedTimeSeconds() > 0.3){
@@ -246,28 +247,28 @@ public class nearBlueAllianceAuto extends OpMode {
                 }
                 if (shotStarted && !shooter.isBusy()) {
                     shotStarted = false;
-                    setPathState(PathState.DRIVE_SHOOTPOS_GATEINTAKE2);
+                    setPathState(PathState.DRIVE_SHOOTPOS_gateIntake2);
                 }
                 break;
 
-            case DRIVE_SHOOTPOS_GATEINTAKE2:
+            case DRIVE_SHOOTPOS_gateIntake2:
 
                 if (pathTimer.getElapsedTimeSeconds() < 0.1) {
-                    follower.followPath(driveShootPosGateIntake2, true);
+                    follower.followPath(driveShootPosgateIntake2, true);
                 }
 
                 if (!follower.isBusy()
-                        && pathTimer.getElapsedTimeSeconds() > 3.6) {
+                        && pathTimer.getElapsedTimeSeconds() > 3.8) {
 
-                    setPathState(PathState.DRIVE_GATEINTAKE_SHOOTPOS2);
+                    setPathState(PathState.DRIVE_gateIntake_SHOOTPOS2);
                 }
 
                 break;
 
-            case DRIVE_GATEINTAKE_SHOOTPOS2:
+            case DRIVE_gateIntake_SHOOTPOS2:
 
                 if (pathTimer.getElapsedTimeSeconds() < 0.1) {
-                    follower.followPath(driveGateIntakeShootPos2, true);
+                    follower.followPath(drivegateIntakeShootPos2, true);
                 }
 
                 if (pathTimer.getElapsedTimeSeconds() > 0.3){
@@ -289,28 +290,28 @@ public class nearBlueAllianceAuto extends OpMode {
                 }
                 if (shotStarted && !shooter.isBusy()) {
                     shotStarted = false;
-                    setPathState(PathState.DRIVE_SHOOTPOS_GATEINTAKE3);
+                    setPathState(PathState.DRIVE_SHOOTPOS_gateIntake3);
                 }
                 break;
 
-            case DRIVE_SHOOTPOS_GATEINTAKE3:
+            case DRIVE_SHOOTPOS_gateIntake3:
 
                 if (pathTimer.getElapsedTimeSeconds() < 0.1) {
-                    follower.followPath(driveShootPosGateIntake3, true);
+                    follower.followPath(driveShootPosgateIntake3, true);
                 }
 
                 if (!follower.isBusy()
-                        && pathTimer.getElapsedTimeSeconds() > 3.9) {
+                        && pathTimer.getElapsedTimeSeconds() > 3.8) {
 
-                    setPathState(PathState.DRIVE_GATEINTAKE_SHOOTPOS3);
+                    setPathState(PathState.DRIVE_gateIntake_SHOOTPOS3);
                 }
 
                 break;
 
-            case DRIVE_GATEINTAKE_SHOOTPOS3:
+            case DRIVE_gateIntake_SHOOTPOS3:
 
                 if (pathTimer.getElapsedTimeSeconds() < 0.1) {
-                    follower.followPath(driveGateIntakeShootPos3, true);
+                    follower.followPath(drivegateIntakeShootPos3, true);
                 }
 
                 if (pathTimer.getElapsedTimeSeconds() > 0.3){

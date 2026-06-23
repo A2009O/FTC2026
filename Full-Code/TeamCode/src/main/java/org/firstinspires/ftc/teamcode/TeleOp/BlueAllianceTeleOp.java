@@ -38,8 +38,8 @@ public class BlueAllianceTeleOp extends OpMode{
 
     double turretDeg = 0.0;
 
-    double TARGET_X = 5;
-    double TARGET_Y = 134;
+    double TARGET_X = 2;
+    double TARGET_Y = 130;
 
     double headingOffset = 0;
 

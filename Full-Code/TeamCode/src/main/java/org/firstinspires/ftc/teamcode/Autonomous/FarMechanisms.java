@@ -15,7 +15,7 @@ public class FarMechanisms {
         PAUSE
     }
     public ShooterState shooterState;
-    private static final double SHOOT_TIME = 0.9;
+    private static final double SHOOT_TIME = 1.4;
 
     public void init(HardwareMap hardwareMap) {
         Intake = hardwareMap.get(DcMotor.class, "Intake");
@@ -34,16 +34,16 @@ public class FarMechanisms {
                 break;
 
             case LAUNCH:
-                Intake.setPower(1);
-                Transfer.setPower(0.7);
+                Intake.setPower(0.9);
+                Transfer.setPower(0.9);
                 if (stateTimer.seconds() >= SHOOT_TIME) {
                     shooterState = ShooterState.INTAKE;
                 }
                 break;
 
             case PAUSE:
-                Intake.setPower(0.7);
-                Transfer.setPower(-0.6);
+                Intake.setPower(0);
+                Transfer.setPower(0);
                 break;
         }
     }

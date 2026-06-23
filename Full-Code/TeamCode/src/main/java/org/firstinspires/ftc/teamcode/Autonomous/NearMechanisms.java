@@ -29,8 +29,8 @@ public class NearMechanisms {
     public void update(){
         switch (shooterState) {
             case INTAKE:
-                Intake.setPower(0.7);
-                Transfer.setPower(-0.7);
+                Intake.setPower(1);
+                Transfer.setPower(-1);
                 break;
 
             case LAUNCH:

@@ -33,8 +33,8 @@ public class nearRedAllianceAuto extends OpMode {
 
     int targetTicks = 0;
 
-    double TARGET_X = 144;
-    double TARGET_Y = 134;
+    double TARGET_X = 142;
+    double TARGET_Y = 130;
 
     DcMotorEx Shooter;
     public double targetVelocity = 1200;
@@ -75,7 +75,8 @@ public class nearRedAllianceAuto extends OpMode {
     private final Pose intake1Pose= new Pose(129.82242990654206, 81.7476635514019,  Math.toRadians(0));
     private final Pose intake2Curve = new Pose(78.50467289719626, 53.831775700934585);
     private final Pose intake2Pose= new Pose(144, 54.6355140186916, Math.toRadians(0));
-    private final Pose gateIntake = new Pose(138.97570093457944, 56.13551401869161, Math.toRadians(20));
+    private final Pose gateIntake1 = new Pose(138.97570093457944, 55.13551401869161, Math.toRadians(16));
+    private final Pose gateIntake23 = new Pose(138.97570093457944, 55.13551401869161, Math.toRadians(18));
     private final Pose gateCurve = new Pose(95.40654205607476, 66.02336448598129);
     private final Pose endPose   = new Pose(87.89719626168224, 111.97196261682244, Math.toRadians(0));
 
@@ -100,33 +101,33 @@ public class nearRedAllianceAuto extends OpMode {
                 .build();
 
         driveShootPosGateIntake1 = follower.pathBuilder()
-                .addPath(new BezierCurve(shootPose, gateCurve, gateIntake))
-                .setLinearHeadingInterpolation(shootPose.getHeading(), gateIntake.getHeading())
+                .addPath(new BezierCurve(shootPose, gateCurve, gateIntake1))
+                .setLinearHeadingInterpolation(shootPose.getHeading(), gateIntake1.getHeading())
                 .build();
 
         driveGateIntakeShootPos1 = follower.pathBuilder()
-                .addPath(new BezierCurve(gateIntake, gateCurve, shootPose))
-                .setConstantHeadingInterpolation(gateIntake.getHeading())
+                .addPath(new BezierCurve(gateIntake1, gateCurve, shootPose))
+                .setConstantHeadingInterpolation(gateIntake1.getHeading())
                 .build();
 
         driveShootPosGateIntake2 = follower.pathBuilder()
-                .addPath(new BezierCurve(shootPose, gateCurve, gateIntake))
-                .setConstantHeadingInterpolation(gateIntake.getHeading())
+                .addPath(new BezierCurve(shootPose, gateCurve, gateIntake23))
+                .setConstantHeadingInterpolation(gateIntake23.getHeading())
                 .build();
 
         driveGateIntakeShootPos2 = follower.pathBuilder()
-                .addPath(new BezierCurve(gateIntake, gateCurve, shootPose))
-                .setConstantHeadingInterpolation(gateIntake.getHeading())
+                .addPath(new BezierCurve(gateIntake23, gateCurve, shootPose))
+                .setConstantHeadingInterpolation(gateIntake23.getHeading())
                 .build();
 
         driveShootPosGateIntake3 = follower.pathBuilder()
-                .addPath(new BezierCurve(shootPose, gateCurve, gateIntake))
-                .setConstantHeadingInterpolation(gateIntake.getHeading())
+                .addPath(new BezierCurve(shootPose, gateCurve, gateIntake23))
+                .setConstantHeadingInterpolation(gateIntake23.getHeading())
                 .build();
 
         driveGateIntakeShootPos3 = follower.pathBuilder()
-                .addPath(new BezierCurve(gateIntake, gateCurve, shootPose))
-                .setConstantHeadingInterpolation(gateIntake.getHeading())
+                .addPath(new BezierCurve(gateIntake23, gateCurve, shootPose))
+                .setConstantHeadingInterpolation(gateIntake23.getHeading())
                 .build();
 
         driveShootPosIntake1Pos = follower.pathBuilder()
@@ -215,7 +216,7 @@ public class nearRedAllianceAuto extends OpMode {
                 }
 
                 if (!follower.isBusy()
-                        && pathTimer.getElapsedTimeSeconds() > 3) {
+                        && pathTimer.getElapsedTimeSeconds() > 3.8) {
 
                     setPathState(PathState.DRIVE_GATEINTAKE_SHOOTPOS1);
                 }
@@ -258,7 +259,7 @@ public class nearRedAllianceAuto extends OpMode {
                 }
 
                 if (!follower.isBusy()
-                        && pathTimer.getElapsedTimeSeconds() > 3.6) {
+                        && pathTimer.getElapsedTimeSeconds() > 3.8) {
 
                     setPathState(PathState.DRIVE_GATEINTAKE_SHOOTPOS2);
                 }
@@ -301,7 +302,7 @@ public class nearRedAllianceAuto extends OpMode {
                 }
 
                 if (!follower.isBusy()
-                        && pathTimer.getElapsedTimeSeconds() > 3.9) {
+                        && pathTimer.getElapsedTimeSeconds() > 3.8) {
 
                     setPathState(PathState.DRIVE_GATEINTAKE_SHOOTPOS3);
                 }

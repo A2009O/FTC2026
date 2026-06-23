@@ -16,7 +16,6 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.RobotMemory;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
-@Autonomous(preselectTeleOp = "BlueAllianceTeleOp")
 public class farBlueAllianceAuto1Row extends OpMode {
 
     private DcMotor turret;
